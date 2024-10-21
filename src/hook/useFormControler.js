@@ -25,9 +25,9 @@ export const useFormControler = () => {
   });
 
   const initialValues = {
-    years: 0,
-    months: 0,
-    days: 0,
+    years: "",
+    months: "",
+    days: "",
   };
 
   const handleAge = ({ years, months, days }) => {

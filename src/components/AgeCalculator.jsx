@@ -17,7 +17,7 @@ export const AgeCalculator = () => {
     months: "--",
     days: "--",
   });
-  const [isValid, setIsValid] = useState(null);
+  const [isValid, setIsValid] = useState(true);
 
   const onSubmit = () => {
     const { years, months, days } = values;
@@ -57,6 +57,8 @@ export const AgeCalculator = () => {
               className={`${
                 touched.days && errors.days
                   ? "text-red-600"
+                  : !isValid
+                  ? "text-red-600"
                   : "text-Smokey-grey"
               }  text-xs tracking-[3px]`}
             >
@@ -66,8 +68,12 @@ export const AgeCalculator = () => {
               type="text"
               name="days"
               id="days"
+              placeholder="DD"
+              maxLength={2}
               className={` ${
                 touched.days && errors.days
+                  ? "border-red-600"
+                  : !isValid
                   ? "border-red-600"
                   : "border-Light-grey"
               } text-lg w-full bg-transparent border  hover:border-Off-black focus:border-Off-black  hover:cursor-pointer py-2 px-4 rounded-md outline-none`}
@@ -78,12 +84,19 @@ export const AgeCalculator = () => {
                 {errors.days}
               </div>
             )}
+            {!isValid && (
+              <div className="leading-3 text-xs text-red-600 ml-2 absolute mt-2   ">
+                Must be valid date
+              </div>
+            )}
           </div>
           <div className="w-1/3">
             <label
               htmlFor=""
               className={`${
-                touched.months && errors.months
+                touched.days && errors.days
+                  ? "text-red-600"
+                  : !isValid
                   ? "text-red-600"
                   : "text-Smokey-grey"
               }  text-xs tracking-[3px]`}
@@ -94,11 +107,15 @@ export const AgeCalculator = () => {
               type="text"
               name="months"
               id="months"
+              placeholder="MM"
+              maxLength={2}
               className={` ${
-                touched.months && errors.months
+                touched.days && errors.days
+                  ? "border-red-600"
+                  : !isValid
                   ? "border-red-600"
                   : "border-Light-grey"
-              } text-lg w-full bg-transparent border  hover:border-Off-black focus:border-Off-black  hover:cursor-pointer py-2 px-4 rounded-md outline-none`}
+              }  text-lg w-full bg-transparent border  hover:border-Off-black focus:border-Off-black  hover:cursor-pointer py-2 px-4 rounded-md outline-none`}
               {...getFieldProps("months")}
             />
             {touched.months && errors.months && (
@@ -111,7 +128,9 @@ export const AgeCalculator = () => {
             <label
               htmlFor=""
               className={`${
-                touched.years && errors.years
+                touched.days && errors.days
+                  ? "text-red-600"
+                  : !isValid
                   ? "text-red-600"
                   : "text-Smokey-grey"
               }  text-xs tracking-[3px]`}
@@ -122,11 +141,15 @@ export const AgeCalculator = () => {
               type="text"
               name="years"
               id="years"
+              placeholder="YYYY"
+              maxLength={4}
               className={` ${
-                touched.years && errors.years
+                touched.days && errors.days
+                  ? "border-red-600"
+                  : !isValid
                   ? "border-red-600"
                   : "border-Light-grey"
-              } text-lg w-full bg-transparent border  hover:border-Off-black focus:border-Off-black  hover:cursor-pointer py-2 px-4 rounded-md outline-none`}
+              }  text-lg w-full bg-transparent border  hover:border-Off-black focus:border-Off-black  hover:cursor-pointer py-2 px-4 rounded-md outline-none`}
               {...getFieldProps("years")}
             />
             {touched.years && errors.years && (
@@ -139,11 +162,7 @@ export const AgeCalculator = () => {
 
         <div className=" w-full relative">
           <div className="my-14 md:my-10 w-full border border-Light-grey"></div>
-          {!isValid && (
-            <div className="leading-3 text-xs text-red-600 ml-2 absolute top-3    ">
-              fecha ingresada no existe
-            </div>
-          )}
+
           <button
             type="submit"
             className="absolute -top-6 left-[40%] md:left-[90%] p-4 bg-Purple rounded-full w-14 h-14 hover:bg-Off-black"
